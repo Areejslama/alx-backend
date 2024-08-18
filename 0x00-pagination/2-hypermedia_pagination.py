@@ -52,8 +52,12 @@ class Server:
         end = min(start + page_size, total_count)
         page_elements = data[start:end]
 
-        next_page = page + 1 if page < total_pages else None
-        prev_page = page - 1 if page > 1 else None
+        next_page = page + 1 
+        if next_page is None:
+            return None
+        prev_page = page - 1 
+        if prev_page is None:
+            return None
 
         return {
                 "page_size": page_size,
