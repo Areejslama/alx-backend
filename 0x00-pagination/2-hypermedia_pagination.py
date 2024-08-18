@@ -46,9 +46,9 @@ class Server:
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         data = self.get_page(page, page_size)
         Set = self.dataset()
-        total_count = len(Set)
-        total_pages = math.ceil(total_count / page_size)
-        size = len(data)
+        total_count = len(Set) if Set else 0
+        total_pages = math.ceil(total_count / page_size) if Set else 0
+        size = len(data) if data else 0
 
         prev_page = page - 1 if page > 1 else None
         next_page = page + 1 if page < total_pages else None
