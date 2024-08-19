@@ -44,6 +44,7 @@ class Server:
         return dataset[start:end]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
+        """get the data of page"""
         data = self.get_page(page, page_size)
         start, end = self.index_range(page, page_size)
 
@@ -53,12 +54,11 @@ class Server:
         prevPage = page - 1 if start > 0 else None
 
         hyperMedia = {
-            'page_size': len(data),
-            'page': page,
-            'data': data,
-            'next_page': nextPage,
-            'prev_page': prevPage,
-            'total_pages': totalPages
-        }
-
+                'page_size': len(data),
+                'page': page,
+                'data': data,
+                'next_page': nextPage,
+                'prev_page': prevPage,
+                'total_pages': totalPages
+                }
         return hyperMedia
