@@ -43,18 +43,18 @@ class Server:
         dataset = self.dataset()
         return dataset[start:end]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Any]:
         data = self.get_page(page, page_size)
-        Set = self.dataset()
-        total_count = len(Set) if Set else 0
-        total_pages = math.ceil(total_count / page_size) if Set else 0
-        size = len(data) if data else 0
+        dataset = self.dataset()
+        total_count = len(dataset)
+        total_pages = math.ceil(total_count / page_size)
+        data_size = len(data)
 
         prev_page = page - 1 if page > 1 else None
         next_page = page + 1 if page < total_pages else None
 
         media = {
-                "page_size": size,
+                "page_size": data_size,
                 "page": page,
                 "data": data,
                 "next_page": next_page,
