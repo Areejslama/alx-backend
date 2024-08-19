@@ -2,7 +2,7 @@
 """this script define a function"""
 import csv
 import math
-from typing import List, Tuple, Any
+from typing import List, Tuple, Any, Dict
 
 
 class Server:
@@ -43,7 +43,7 @@ class Server:
         dataset = self.dataset()
         return dataset[start:end]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         data = self.get_page(page, page_size)
         Set = self.dataset()
         total_count = len(Set) if Set else 0
