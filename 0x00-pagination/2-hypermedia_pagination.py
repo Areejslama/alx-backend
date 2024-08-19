@@ -43,22 +43,24 @@ class Server:
         dataset = self.dataset()
         return dataset[start:end]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Any]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         data = self.get_page(page, page_size)
-        dataset = self.dataset()
-        total_count = len(dataset)
-        total_pages = math.ceil(total_count / page_size)
-        data_size = len(data)
+        dataSet = self.__dataset
+        data_size = len(dataSet) if dataSet else 0
 
-        prev_page = page - 1 if page > 1 else None
-        next_page = page + 1 if page < total_pages else None
+        totalPages = math.ceil(data_size / page_size) if dataSet else 0
+        pages_size = len(data) if data else 0
 
-        media = {
-                "page_size": data_size,
-                "page": page,
-                "data": data,
-                "next_page": next_page,
-                "prev_page": prev_page,
-                "total_pages": total_pages
-                }
-        return media
+        prevPage = page - 1 if page > 1 else None
+        nextPage = page + 1 if page < totalPages else None
+
+        hyperMedia = {
+            'page_size': pages_size,
+            'page': page,
+            'data': data,
+            'next_page': nextPage,
+            'prev_page': prevPage,
+            'total_pages': totalPages
+        }
+
+        return hyperMedia
