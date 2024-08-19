@@ -40,21 +40,23 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-            assert isinstance(index, int) and index >= 0
-            dataset = self.__indexed_dataset
-            total = len(dataset)
-            start = index
-            data = []
-            while len(data) < page_size and start in dataset:
-                if dataset[start] is not None:
-                    data.append(dataset[start])
-                    start += 1
-            next_index = index + 1 if len(data) == page_size and start in dataset else None
+        """ return a dictionary with the key-value pairs"""
+        assert isinstance(index, int) and index >= 0, "Index must be integer"
+        dataset = self.__indexed_dataset
+        total = len(dataset)
+        start = index
+        data = []
+
+        while len(data) < page_size and start < total:
+            if start in dataset:
+                data.append(dataset[start])
+                start += 1
+
+            next_index = start if start < total else None
 
             return {
                     "index": index,
                     "next_index": next_index,
-                    "page_size": page_size,
+                    "page_size": len(data),
                     "data": data
                 }
-
