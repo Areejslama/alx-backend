@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """this script define a class"""
 from base_caching import BaseCaching
 
@@ -10,8 +10,6 @@ class BasicCache(BaseCaching):
         if key is None or item is None:
             return
         self.cache_data[key] = item
-        print("{}: {}".format(key, item))
-
 
     def get(self, key):
         """Get an item by key"""
