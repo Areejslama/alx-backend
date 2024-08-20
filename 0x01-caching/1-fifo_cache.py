@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 """this script define a class"""
 from base_caching import BaseCaching
+from collections import OrderedDict
 
 
 class FIFOCache(BaseCaching):
     """ FIFO Cache"""
+    def __init__(self):
+        """intialize"""
+        super().__init__()
+        self.cache_data = OrderedDict()
+
 
     def put(self, key, item):
         """ Add an item to the cache """
@@ -13,8 +19,7 @@ class FIFOCache(BaseCaching):
         
         self.cache_data[key] = item
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            first_key = next(iter(self.cache_data))
-            del self.cache_data[first_key]
+            first_key, _ = self.cache_data.popitem(False)
             print("DISCARD: ", first_key)
 
     def get(self, key):
