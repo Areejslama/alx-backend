@@ -4,23 +4,26 @@ from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    """define class"""
+    """ FIFO Cache"""
+
     def __init__(self):
-        """initializ"""
+        """ Initialize"""
         super().__init__()
 
     def put(self, key, item):
-        """put values in dictionary"""
+        """ Add an item to the cache """
         if key is None or item is None:
             return
+
         self.cache_data[key] = item
+
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             first_key = next(iter(self.cache_data))
             del self.cache_data[first_key]
             print("DISCARD: ", first_key)
 
     def get(self, key):
-        """get the items"""
+        """ Retrieve an item"""
         if key is None or key not in self.cache_data:
             return None
         return self.cache_data[key]
