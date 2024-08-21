@@ -29,4 +29,3 @@ class MRUCache(BaseCaching):
         value = self.cache_data[key]
         self.cache_data.move_to_end(key, False)
         return value
-
