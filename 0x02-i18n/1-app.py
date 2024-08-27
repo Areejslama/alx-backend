@@ -4,28 +4,23 @@ from flask import Flask, render_template
 from flask_babel import Babel
 
 
-app = Flask(__name__)
+class Config:
+    """define class
+    """
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
 
-app.config['BABEL_DEFAULT_LOCALE'] = "en"
-app.config['BABEL_DEFAULT_TIMEZONE'] = "UTC"
+
+app = Flask(__name__)
+app.config.from_object(Config)
 babel = Babel(app)
 
 
-class config:
-    """define class"""
-    LANGUAGES = ["en", "fr"]
-
-    def get_locale():
-        return app.config['BABEL_DEFAULT_LOCALE']
-
-    def get_timezone():
-        """define method"""
-        return app.config['BABEL_DEFAULT_TIMEZONE']
-
-    @app.route('/')
-    def greet():
-        """define method"""
-        return render_template('1-index.html')
+@app.route('/')
+def greet():
+    """define method"""
+    return render_template('1-index.html')
 
 
 if __name__ == '__main__':
