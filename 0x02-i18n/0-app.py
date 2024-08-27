@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """this script to setup flask"""
-from flask import Flask
+from flask import Flask, render_template
 
+
+app = Flask(__name__)
 
 @app.route('/')
-app = Flask(_name_)
+def hello():
+    return render_template(0-index.html)
