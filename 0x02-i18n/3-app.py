@@ -21,13 +21,11 @@ babel = Babel(app)
 def get_locale():
     """Retrieves the locale for a web page"""
     return request.accept_languages.best_match(app.config["LANGUAGES"])
+
 @app.route('/')
 def hello():
     """define function"""
-    title = _("home_title")
-    header = _("home_header")
-
-    return render_template('3-index.html', title=title, header=header)
+    return render_template('3-index.html')
 
 
 if __name__ == '__main__':
