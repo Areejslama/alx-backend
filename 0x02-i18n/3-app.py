@@ -26,5 +26,5 @@ def hello():
     return render_template('3-index.html', title=title, header=header)
 
 
-if __name__== '__main__':
+if __name__ == '__main__':
     app.run()
