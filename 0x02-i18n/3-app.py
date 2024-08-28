@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """this script define function"""
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext as _
+from flask_babel import Babel, _
 
 
 class Config:
-    """define class"""
+    """define class to return languages for web page"""
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
