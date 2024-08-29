@@ -25,6 +25,7 @@ def get_locale():
         return request.args.get('locale')
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
+
 @app.route('/')
 def welcome():
     """The home"""
