@@ -20,10 +20,10 @@ babel = Babel(app)
 @babel.localeselector
 def get_locale():
     """Retrieves the locale for a web page"""
+    forced_locale = 'fr'
     if 'locale' in request.args:
         return request.args.get('locale')
     return request.accept_languages.best_match(app.config["LANGUAGES"])
-
 
 @app.route('/')
 def welcome():
