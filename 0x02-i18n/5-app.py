@@ -33,18 +33,25 @@ users = {
 }
 
 
-def get_user(id):
+def get_user():
     """define function"""
-    return users.get(int(id), 0)
+    user_id = request.args.get('login_as')
+    if user_id is None:
+        return None
+    return users.get(int(user_id))
 
 
 @app.before_request
 def before_request():
     """define method"""
-    user_id = request.args.get('login_as', 0)
-    g.user = get_user(user_id)
+    user = get_user()
+    g.user = user
 
 @app.route('/')
 def hello():
     """define function"""
     return render_template('5-index.html')
+
+
+if __name__ == '__main__':
+    app.run()
