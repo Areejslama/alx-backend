@@ -18,11 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: 3-app.py:23
 msgid "home_title"
 msgstr "Welcome to Holberton"
 
-#: 3-app.py:24
 msgid "home_header"
 msgstr "Hello world!"
 
