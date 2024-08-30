@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""this script to define function"""
-from flask import Flask, g, request, render_template
+"""A Basic Flask app"""
 from flask_babel import Babel
+from flask import Flask, render_template, request, g
 
 
 class Config:
@@ -16,6 +16,15 @@ app = Flask(__name__)
 app.config.from_object(Config)
 babel = Babel(app)
 
+
+@babel.localeselector
+def get_locale():
+    """Retrieves the locale for a web page"""
+    forced_locale = 'fr'
+    if 'locale' in request.args:
+        return request.args.get('locale')
+    return request.accept_languages.best_match(app.config["LANGUAGES"])
+
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
@@ -26,9 +35,7 @@ users = {
 
 def get_user():
     """define function"""
-    user_id = request.args.get('login_as', None)
-    if user_id is None:
-        return None
+    user_id = request.args.get('login_as', 0)
     return users.get(user_id)
 
 
