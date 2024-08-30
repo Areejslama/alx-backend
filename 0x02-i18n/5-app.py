@@ -33,17 +33,16 @@ users = {
 }
 
 
-def get_user():
+def get_user(id):
     """define function"""
-    user_id = request.args.get('login_as', 0)
-    return users.get(user_id)
+    return users.get(int(id), 0)
 
 
 @app.before_request
 def before_request():
     """define method"""
-    g.user = get_user()
-
+    user_id = request.args.get('login_as', 0)
+    g.user = get_user(user_id)
 
 @app.route('/')
 def hello():
