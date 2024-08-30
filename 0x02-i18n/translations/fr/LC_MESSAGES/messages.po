@@ -18,15 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
+#: 3-app.py
 msgid "home_title"
 msgstr "Bienvenue chez Holberton"
 
+#: 3-app.py
 msgid "home_header"
 msgstr "Bonjour monde!"
-
-msgid "logged_in_as"
-msgstr "Vous êtes connecté en tant que %(username)s."
-
-msgid "not_logged_in"
-msgstr "Vous n'êtes pas connecté."
 
