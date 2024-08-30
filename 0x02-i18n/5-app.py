@@ -25,6 +25,7 @@ def get_locale():
         return request.args.get('locale')
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
+
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
@@ -46,6 +47,7 @@ def before_request():
     """define method"""
     user = get_user()
     g.user = user
+
 
 @app.route('/')
 def hello():
