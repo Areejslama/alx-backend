@@ -16,16 +16,6 @@ app = Flask(__name__)
 app.config.from_object(Config)
 babel = Babel(app)
 
-
-@babel.localeselector
-def get_locale():
-    """Retrieves the locale for a web page"""
-    forced_locale = 'fr'
-    if 'locale' in request.args:
-        return request.args.get('locale')
-    return request.accept_languages.best_match(app.config["LANGUAGES"])
-
-
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
@@ -47,6 +37,14 @@ def before_request():
     """define method"""
     user = get_user()
     g.user = user
+
+
+@babel.localeselector
+def get_locale():
+    """Retrieves the locale for a web page"""
+    if 'locale' in request.args:
+        return request.args.get('locale')
+    return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
 @app.route('/')
