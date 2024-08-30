@@ -1,8 +1,20 @@
 #!/usr/bin/env python3
 """this script to define function"""
-from flask import Flask, g, request, render_template 
+from flask import Flask, g, request, render_template
+from flask_babel import Babel
+
+
+class Config:
+    """Represents a Flask Babel configuration.
+    """
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
+
 
 app = Flask(__name__)
+app.config.from_object(Config)
+babel = Babel(app)
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -11,7 +23,8 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
-def get_user(self):
+
+def get_user():
     """define function"""
     user_id = request.args.get('login_as', None)
     if user_id is None:
@@ -20,14 +33,12 @@ def get_user(self):
 
 
 @app.before_request
-def before_request(self):
+def before_request():
     """define method"""
-    user = request.get_user
-    g.user = user
+    g.user = get_user()
 
 
 @app.route('/')
 def hello():
     """define function"""
     return render_template('5-index.html')
-
