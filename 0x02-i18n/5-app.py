@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-"""A Basic Flask app"""
+"""A Basic Flask app with internationalization support.
+"""
 from flask_babel import Babel
+from typing import Union, Dict
 from flask import Flask, render_template, request, g
 
 
@@ -15,7 +17,6 @@ class Config:
 app = Flask(__name__)
 app.config.from_object(Config)
 babel = Babel(app)
-
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
@@ -24,32 +25,35 @@ users = {
 }
 
 
-def get_user():
-    """define function"""
-    user_id = request.args.get('login_as')
-    if user_id is None:
-        return None
-    return users.get(int(user_id))
+def get_user() -> Union[Dict, None]:
+    """Retrieves a user based on a user id.
+    """
+    login_id = request.args.get('login_as')
+    if login_id:
+        return users.get(int(login_id))
+    return None
 
 
 @app.before_request
-def before_request():
-    """define method"""
+def before_request() -> None:
+    """Performs some routines before each request's resolution.
+    """
     user = get_user()
     g.user = user
 
 
 @babel.localeselector
-def get_locale():
-    """Retrieves the locale for a web page"""
+def get_locale() -> str:
+    """Retrieves the locale for a web page.
+    """
     if 'locale' in request.args:
         return request.args.get('locale')
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
 @app.route('/')
-def hello():
-    """define function"""
+def get_index() -> str:
+    """define method"""
     return render_template('5-index.html')
 
 
