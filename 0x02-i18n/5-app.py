@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-"""A Basic Flask app with internationalization support.
-"""
+"""A Basic Flask app"""
 from flask_babel import Babel
-from typing import Union, Dict
 from flask import Flask, render_template, request, g
 
 
@@ -25,9 +23,8 @@ users = {
 }
 
 
-def get_user() -> Union[Dict, None]:
-    """Retrieves a user based on a user id.
-    """
+def get_user():
+    """Retrieves a user"""
     login_id = request.args.get('login_as')
     if login_id:
         return users.get(int(login_id))
@@ -35,17 +32,15 @@ def get_user() -> Union[Dict, None]:
 
 
 @app.before_request
-def before_request() -> None:
-    """Performs some routines before each request's resolution.
-    """
+def before_request():
+    """Performs some routines"""
     user = get_user()
     g.user = user
 
 
 @babel.localeselector
-def get_locale() -> str:
-    """Retrieves the locale for a web page.
-    """
+def get_locale():
+    """Retrieves the locale"""
     locale = request.args.get('locale', '')
     if locale in app.config["LANGUAGES"]:
         return locale
@@ -53,9 +48,8 @@ def get_locale() -> str:
 
 
 @app.route('/')
-def get_index() -> str:
-    """The home/index page.
-    """
+def get_index():
+    """The home"""
     return render_template('5-index.html')
 
 
